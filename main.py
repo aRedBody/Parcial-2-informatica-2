@@ -26,7 +26,7 @@ def main():
                     print(f"Columnas: {cols}")
                     c1 = input("Primera columna: ")
                     c2 = input("Segunda columna: ")
-                    op = input("Operacion (s=sumar / r=restar): ")
+                    op = input("Operacion (sumar / restar): ")
                     obj.operaciones(c1, c2, op)
                 elif sub == 4:
                     col = input(f"Columna para remuestrear {cols}: ")
