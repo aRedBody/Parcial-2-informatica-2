@@ -89,7 +89,7 @@ class AnalizadorSIATA:
         print(cat.value_counts().to_string())
 
         # 3. sumar o restar dos columnas
-        if op == 's':
+        if op.lower().startswith('s'):
             res = self.__df[col1] + self.__df[col2]
             print(f"\n3. Suma '{col1}' + '{col2}' (primeras 5 filas):")
         else:
