@@ -149,7 +149,7 @@ class AnalizadorEEG:
     def cargar(self, ruta):
         self.__ruta = ruta
         mat = sio.loadmat(ruta)
-        llaves = sio.whosmat(ruta)
+        llaves = [l for l in sio.whosmat(ruta) if not l[0].startswith('__')]
         print("\nVariables en el archivo (whosmat):")
         for i, (nombre, forma, tipo) in enumerate(llaves):
             print(f"  {i} -> {nombre}: {forma} ({tipo})")
@@ -169,7 +169,8 @@ class AnalizadorEEG:
     def mostrarLlaves(self):
         print("\nVariables en el archivo (whosmat):")
         for nombre, forma, tipo in sio.whosmat(self.__ruta):
-            print(f"  {nombre}: {forma} ({tipo})")
+            if not nombre.startswith('__'):
+                print(f"  {nombre}: {forma} ({tipo})")
 
     def verCanales(self):
         return self.__data3d.shape[0]
