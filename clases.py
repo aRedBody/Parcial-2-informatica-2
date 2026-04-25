@@ -54,9 +54,10 @@ class AnalizadorSIATA:
 
         axes[0].plot(self.__df.index, self.__df[col], lw=0.8, color='steelblue')
         axes[0].set_title("Serie temporal")
-        axes[0].set_xlabel("Fecha")
+        axes[0].set_xlabel("Fecha" if self.__tiene_fecha else "Indice")
         axes[0].set_ylabel(col)
-        axes[0].tick_params(axis='x', rotation=30)
+        if self.__tiene_fecha:
+            axes[0].tick_params(axis='x', rotation=30)
 
         axes[1].boxplot(datos, patch_artist=True)
         axes[1].set_title("Boxplot")
