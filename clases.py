@@ -216,6 +216,9 @@ class AnalizadorEEG:
         plt.show()
 
     def estadisticas3D(self, eje):
+        if eje not in (0, 1, 2):
+            print(f"  Eje invalido: {eje}. Debe ser 0, 1 o 2.")
+            return
         prom = np.mean(self.__data3d, axis=eje).flatten()
         std  = np.std(self.__data3d,  axis=eje).flatten()
 
