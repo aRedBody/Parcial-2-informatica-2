@@ -17,6 +17,8 @@ class AnalizadorSIATA:
     def cargar(self, ruta):
         self.__ruta = ruta
         self.__df = pd.read_csv(ruta)
+        if len(self.__df.columns) == 1:
+            self.__df = pd.read_csv(ruta, sep=';')
         # Detectar columna de fecha (datetime64 ya parseado, o string convertible)
         for col in self.__df.columns:
             if pd.api.types.is_datetime64_any_dtype(self.__df[col]):
