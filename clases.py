@@ -80,8 +80,12 @@ class AnalizadorSIATA:
     def operaciones(self, col1, col2, op):
         # 1. apply: normalizar col1
         mn, mx = self.__df[col1].min(), self.__df[col1].max()
-        norm = self.__df[col1].apply(lambda x: (x - mn) / (mx - mn) if pd.notna(x) else float('nan'))
-        print(f"\n1. apply - Normalizacion de '{col1}' (primeras 5 filas):")
+        if mn == mx:
+            norm = self.__df[col1].apply(lambda x: 0.0 if pd.notna(x) else float('nan'))
+            print(f"\n1. apply - Normalizacion de '{col1}' (columna constante, todos los valores = 0):")
+        else:
+            norm = self.__df[col1].apply(lambda x: (x - mn) / (mx - mn) if pd.notna(x) else float('nan'))
+            print(f"\n1. apply - Normalizacion de '{col1}' (primeras 5 filas):")
         print(norm.head().to_string())
 
         # 2. map: categorizar col1 segun mediana
