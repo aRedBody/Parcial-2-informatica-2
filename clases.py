@@ -50,6 +50,9 @@ class AnalizadorSIATA:
 
     def graficarColumna(self, col):
         datos = self.__df[col].dropna()
+        if datos.empty:
+            print(f"  La columna '{col}' no tiene datos validos.")
+            return
 
         fig, axes = plt.subplots(1, 3, figsize=(15, 5))
         fig.suptitle(f"SIATA - {col}")
