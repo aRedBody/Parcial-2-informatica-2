@@ -186,6 +186,9 @@ class AnalizadorEEG:
         return self.__data2d.shape[1]
 
     def sumarCanales(self, canales, pmin, pmax):
+        if pmin >= pmax:
+            print("  pmin debe ser menor que pmax.")
+            return
         t = np.arange(pmin, pmax) / self.FS
         suma = np.sum([self.__data2d[ch, pmin:pmax] for ch in canales], axis=0)
         nombres = [c + 1 for c in canales]
