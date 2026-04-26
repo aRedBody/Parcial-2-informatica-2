@@ -26,7 +26,7 @@ class AnalizadorSIATA:
                 self.__tiene_fecha = True
                 print(f"  Columna de fecha '{col}' establecida como indice.")
                 break
-            if self.__df[col].dtype == object or str(self.__df[col].dtype) == 'string':
+            if not pd.api.types.is_numeric_dtype(self.__df[col]):
                 conv = pd.to_datetime(self.__df[col], errors='coerce')
                 if conv.notna().sum() > len(conv) * 0.5:
                     self.__df[col] = conv
